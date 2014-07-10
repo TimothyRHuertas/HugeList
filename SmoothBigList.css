@@ -1,0 +1,39 @@
+li{
+	height: 43px;
+	font: 12px;
+	padding: 4px;
+	border-bottom: 1px solid #e0e0e0;
+	list-style: none;
+	margin: 0px;
+	overflow: hidden;
+	width: 100%
+	/*width: 200px;*/
+}
+
+ul{
+	margin: 0px;
+	padding: 0px;
+	width: 100%
+}
+
+div.list{
+	height: 100%;
+	/*border: 1px solid green;*/
+	overflow: hidden
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.imageBlock
+{
+	width: 35px;
+	height: 35px;
+	float: left;
+	margin: 2px;
+	background: #e0e0e0;
+}
+

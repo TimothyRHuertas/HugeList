@@ -1,0 +1,110 @@
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+		<link type='text/css' href='SmoothBigList.css' rel='stylesheet'/>
+		<style>
+		.itemRendererTemplate
+		{
+			display: none
+		}
+		body
+		{
+			margin: 0px;
+			padding: 0px
+		}
+		</style>
+		<script src="SmoothBigListEmbedScript.js"></script>
+		
+		<script>
+		function initTest()
+		{
+			loadJson("data.json");
+		}
+		
+		/* flicker stuff */
+		function flickrFeed( json ) 
+		{
+			var items = json.photos.photo;
+			var url;
+			var item;
+			dataProvider = new Array();
+			var dataItem;
+			var idx=1;
+			for(var x=1; x<=10000; x++)
+			{
+				
+				for( var i=0; i< 50; i++) 
+				{
+					
+					item = items[i];
+					dataItem = new Object();
+					dataItem.title = idx + " " + item.title;
+					idx++;
+					url = "http://farm" + item.farm;
+					url += ".staticflickr.com/" + item.server;
+					url += "/" + item.id + "_" + item.secret + "_s.jpg?" + Math.random()*100+new Date().getTime();
+					dataItem.url = url;
+					dataProvider.push(dataItem);
+				}
+			}
+			
+			var itemRenderer = document.getElementById("imageItemRenderer");	
+			var listHolder = document.getElementById('testList');
+
+				setup(dataProvider, itemRenderer, beforeTweenHandler, afterTweenHandler, setData, listHolder);
+
+		}
+		
+		function loadJson( url ) 
+		{
+			var script = document.createElement( "script" );
+			script.type = "text/javascript";
+			script.src = url;
+			document.getElementsByTagName('head')[0].appendChild(script);
+		}
+		
+		function beforeTweenHandler(itemRenderer)
+		{
+			itemRenderer.imageHolder.image.style.display = "none";
+		}
+		
+		function afterTweenHandler(itemRenderer)
+		{
+			itemRenderer.imageHolder.image.style.display = "block";
+		}
+		
+		function setData(dataItem, itemRenderer, tweening)
+		{
+			if(!tweening)
+			{
+				itemRenderer.imageHolder.image.src = dataItem.url;
+			}
+			
+			itemRenderer.titleP.innerHTML = dataItem.title ? dataItem.title : "<no title>";
+		}
+
+		function handleScroll(){
+			// var scroller = document.getElementById('scroller');
+			// var theList = document.getElementById('testList');
+			// theList.style.marginTop = scroller.scrollTop + 'px';
+			// console.log(theList.offsetTop, scroller.scrollTop);
+			// debugger;
+		}
+			
+		</script>
+	</head>
+	<body onload="initTest()">
+		<div id="testList" onscroll='handleScroll()' style="position: relative;  height: 300px; overflow-y: auto">
+			
+		</div>
+		
+		
+		<div id="imageItemRenderer" class="itemRendererTemplate" data-accessorName="root">
+			<div data-accessorName="imageHolder" style="width: 35px; height: 35px; background: #e0e0e0; float: left">
+				<img data-accessorName="image" width="35px" height="35px"/>
+			</div>
+			<p data-accessorName="titleP" style="padding-top: 1px; padding-left: 10px; font-size: 14px; float: left"></p>
+			<h2>hi dude</h2>
+		</div>
+	</body>
+</html>

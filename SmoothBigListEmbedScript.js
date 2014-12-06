@@ -14,7 +14,6 @@ var bottomHiddenRows;
 var availRows;
 var hiddenRows;
 var inited;
-var swipeVilosity;
 var tweening;
 var startArrayElement = -1;
 var maxCount;
@@ -112,7 +111,7 @@ function setSelectedIndex(value){
 		rowsOnTop = availRows-visibleRows-rowsOnBottom; 
 		// topOffset = Math.max(0,(selectedIndex-rowsOnTop));
 
-		// var start = Math.ceil(selectedIndex-rowsOnTop);
+		var start = Math.ceil(selectedIndex-rowsOnTop);
 
 		topOffset = Math.max(0,Math.floor(selectedIndex-rowsOnTop));
                
@@ -257,12 +256,9 @@ function setup(data, ir, bth, ath, sdh, container)
 		computeChange(container.scrollLeft, scrollOffset);
 		setSelectedIndex(selectedIndex-cy/rowHeight, false);
 		recordCords(container.scrollLeft, scrollOffset);
-
-		// console.log(scrollHeight, container.scrollHeight, selectedIndex * rowHeight, dataProvider.length, selectedIndex);
-
 	};
 
-	window.setInterval(callback, 1000/40);
+	window.setInterval(callback, 1000/60);
 }
 
 

@@ -1,19 +1,18 @@
 li{
-	height: 43px;
+	height: 248px;
 	font: 12px;
 	padding: 4px;
 	border-bottom: 1px solid #e0e0e0;
 	list-style: none;
-	margin: 0px;
 	overflow: hidden;
+	margin: 0 auto;
 }
 
 ul{
 	margin: 0px;
 	padding: 0px;
+	text-align: center;
 }
-
-
 
 body
 {
@@ -21,12 +20,22 @@ body
 	padding: 0;
 }
 
-.imageBlock
-{
-	width: 35px;
-	height: 35px;
+.imageHolder{
+	background-size: cover; 
+	width: 240px; 
+	height: 220px; 
+	background-color: #e0e0e0; 
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+label.image{
+	height: 18px;
+	padding: 1px;
+	margin: 0;
+	background: #ccc;
+	font-size: 12px;
+	width: 100%;
 	float: left;
-	margin: 2px;
-	background: #e0e0e0;
 }
 

@@ -30,7 +30,7 @@
 			dataProvider = new Array();
 			var dataItem;
 			var idx=1;
-			for(var x=1; x<=10000; x++)
+			for(var x=1; x<=1000; x++)
 			{
 				
 				for( var i=0; i< 50; i++) 
@@ -42,7 +42,7 @@
 					idx++;
 					url = "http://farm" + item.farm;
 					url += ".staticflickr.com/" + item.server;
-					url += "/" + item.id + "_" + item.secret + "_s.jpg?" + Math.random()*100+new Date().getTime();
+					url += "/" + item.id + "_" + item.secret + "_m.jpg?" + Math.random()*100+new Date().getTime();
 					dataItem.url = url;
 					dataProvider.push(dataItem);
 				}
@@ -77,18 +77,13 @@
 		{
 			if(!tweening)
 			{
-				itemRenderer.imageHolder.image.src = dataItem.url;
+				itemRenderer.imageHolder.style.backgroundImage = "url('"+ dataItem.url +"')";
+				itemRenderer.imageHolder1.style.backgroundImage  = "url('"+ dataItem.url +"1')";
+				itemRenderer.imageHolder2.style.backgroundImage  = "url('"+ dataItem.url +"2')";
+				itemRenderer.imageHolder3.style.backgroundImage  = "url('"+ dataItem.url +"3')";
 			}
 			
-			itemRenderer.titleP.innerHTML = dataItem.title ? dataItem.title : "<no title>";
-		}
-
-		function handleScroll(){
-			// var scroller = document.getElementById('scroller');
-			// var theList = document.getElementById('testList');
-			// theList.style.marginTop = scroller.scrollTop + 'px';
-			// console.log(theList.offsetTop, scroller.scrollTop);
-			// debugger;
+			itemRenderer.titleLabel.innerHTML = dataItem.title ? dataItem.title : "<no title>";
 		}
 			
 		</script>
@@ -100,11 +95,15 @@
 		
 		
 		<div id="imageItemRenderer" class="itemRendererTemplate" data-accessorName="root">
-			<div data-accessorName="imageHolder" style="width: 35px; height: 35px; background: #e0e0e0; float: left">
-				<img data-accessorName="image" width="35px" height="35px"/>
+			<div data-accessorName="imageHolder"  class="imageHolder">
 			</div>
-			<p data-accessorName="titleP" style="padding-top: 1px; padding-left: 10px; font-size: 14px; float: left"></p>
-			<h2>hi dude</h2>
+			<div data-accessorName="imageHolder1" class="imageHolder">
+			</div>
+			<div data-accessorName="imageHolder2"  class="imageHolder">
+			</div>
+			<div data-accessorName="imageHolder3"  class="imageHolder">
+			</div>
+			<label data-accessorName="titleLabel" class="image"></label>
 		</div>
 	</body>
 </html>

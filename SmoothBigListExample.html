@@ -22,20 +22,16 @@
 		}
 		
 		/* flicker stuff */
-		function flickrFeed( json ) 
-		{
+		function flickrFeed( json )  {
 			var items = json.photos.photo;
 			var url;
 			var item;
 			dataProvider = new Array();
 			var dataItem;
 			var idx=1;
-			for(var x=1; x<=1000; x++)
-			{
+			for(var x=1; x<=1000; x++) {
 				
-				for( var i=0; i< 50; i++) 
-				{
-					
+				for( var i=0; i< 50; i++)  {
 					item = items[i];
 					dataItem = new Object();
 					dataItem.title = idx + " " + item.title;
@@ -51,48 +47,33 @@
 			var itemRenderer = document.getElementById("imageItemRenderer");	
 			var listHolder = document.getElementById('testList');
 
-				setup(dataProvider, itemRenderer, beforeTweenHandler, afterTweenHandler, setData, listHolder);
-
+			setup(dataProvider, itemRenderer, setData, listHolder);
 		}
 		
-		function loadJson( url ) 
-		{
+		function loadJson( url )  {
 			var script = document.createElement( "script" );
 			script.type = "text/javascript";
 			script.src = url;
 			document.getElementsByTagName('head')[0].appendChild(script);
 		}
 		
-		function beforeTweenHandler(itemRenderer)
-		{
-			itemRenderer.imageHolder.image.style.display = "none";
-		}
 		
-		function afterTweenHandler(itemRenderer)
-		{
-			itemRenderer.imageHolder.image.style.display = "block";
-		}
-		
-		function setData(dataItem, itemRenderer, tweening)
-		{
-			if(!tweening)
-			{
-				itemRenderer.imageHolder.style.backgroundImage = "url('"+ dataItem.url +"')";
-				itemRenderer.imageHolder1.style.backgroundImage  = "url('"+ dataItem.url +"1')";
-				itemRenderer.imageHolder2.style.backgroundImage  = "url('"+ dataItem.url +"2')";
-				itemRenderer.imageHolder3.style.backgroundImage  = "url('"+ dataItem.url +"3')";
-			}
-			
+		function setData(dataItem, itemRenderer) {
+
+			itemRenderer.imageHolder.style.backgroundImage = "url('"+ dataItem.url +"')";
+			itemRenderer.imageHolder1.style.backgroundImage  = "url('"+ dataItem.url +"1')";
+			itemRenderer.imageHolder2.style.backgroundImage  = "url('"+ dataItem.url +"2')";
+			itemRenderer.imageHolder3.style.backgroundImage  = "url('"+ dataItem.url +"3')";
+
 			itemRenderer.titleLabel.innerHTML = dataItem.title ? dataItem.title : "<no title>";
 		}
 			
 		</script>
 	</head>
 	<body onload="initTest()">
-		<div id="testList" onscroll='handleScroll()' style="position: relative;  height: 100%; overflow-y: auto">
+		<div id="testList" style="position: relative;  height: 100%; overflow-y: auto">
 			
 		</div>
-		
 		
 		<div id="imageItemRenderer" class="itemRendererTemplate" data-accessorName="root">
 			<div data-accessorName="imageHolder"  class="imageHolder">

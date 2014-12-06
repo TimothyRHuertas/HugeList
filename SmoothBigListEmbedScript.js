@@ -14,13 +14,9 @@ var bottomHiddenRows;
 var availRows;
 var hiddenRows;
 var inited;
-var tweening;
 var startArrayElement = -1;
 var maxCount;
-var fingerDown;
 var itemRendererDom;
-var beforeTweenHandler;
-var afterTweenHandler;
 var setDataHandler;
 var scrollOffset;
 var availHeight;
@@ -109,9 +105,8 @@ function setSelectedIndex(value){
 		}
 
 		rowsOnTop = availRows-visibleRows-rowsOnBottom; 
-		// topOffset = Math.max(0,(selectedIndex-rowsOnTop));
 
-		var start = Math.ceil(selectedIndex-rowsOnTop);
+		// var start = Math.ceil(selectedIndex-rowsOnTop);
 
 		topOffset = Math.max(0,Math.floor(selectedIndex-rowsOnTop));
                
@@ -124,15 +119,13 @@ function setSelectedIndex(value){
 			var domElement;
 			var dataItem;
 			
-			for(var i=0; i<visibleData.length; i++)
-			{
-				if(theList.children[i].data!=visibleData[i])
-				{
+			for(var i=0; i<visibleData.length; i++) {
+				if(theList.children[i].data!=visibleData[i]) {
 					dataItem = visibleData[i];
 					domElement = theList.children[i];
 					domElement.data = dataItem;
 					
-					setDataHandler(dataItem, domElement, tweening);
+					setDataHandler(dataItem, domElement);
 				}
 			}
 			
@@ -141,21 +134,16 @@ function setSelectedIndex(value){
 	
 	
 		theList.style.top = Math.max(0, scrollOffset - ((selectedIndex-topOffset)*rowHeight));
-		// theList.style.top = Math.max(theWindow.offsetHeight-theList.offsetHeight, (selectedIndex-topOffset)*rowHeight * -1);
-		// console.log(theList.style.top, scrollOffset, selectedIndex, topOffset, rowHeight);
 	}
 	
 }
 
-function extractDataPointerMap(obj,domE)
-{
+function extractDataPointerMap(obj,domE) {
 	var theChild;
 	var childDescriptor;
-	for(var i=0; i<domE.children.length; i++)
-	{
+	for(var i=0; i<domE.children.length; i++) {
 		theChild = domE.children[i];
-		if(theChild.getAttribute("data-accessorName"))
-		{
+		if(theChild.getAttribute("data-accessorName")) {
 			childDescriptor = new Object();
 			childDescriptor.relativeIndex = i;
 			
@@ -172,12 +160,9 @@ function extractDataPointerMap(obj,domE)
 	return obj;
 }
 
-function applyDataMap(childMap, domE)
-{
-	for(var prop in childMap)
-	{
-		if(prop != "relativeIndex")
-		{
+function applyDataMap(childMap, domE) {
+	for(var prop in childMap) {
+		if(prop != "relativeIndex") {
 			
 			domE[prop] = domE.children[childMap[prop].relativeIndex];
 			applyDataMap(childMap[prop], domE.children[childMap[prop].relativeIndex]);
@@ -186,14 +171,12 @@ function applyDataMap(childMap, domE)
 	}
 }
 
-function initItemRenderers()
-{
+function initItemRenderers() {
 	var payload = itemRendererDom.innerHTML;
 	var childMap = extractDataPointerMap(new Object(), itemRendererDom);
 	var theChild;
 	
-	for(var i=0; i<theList.children.length; i++)
-	{
+	for(var i=0; i<theList.children.length; i++) {
 		theChild = theList.children[i];
 		theChild.innerHTML = payload;
 		
@@ -201,14 +184,11 @@ function initItemRenderers()
 	}
 }
 
-function setup(data, ir, bth, ath, sdh, container)
-{
+function setup(data, ir, sdh, container) {
 	availHeight = screen.availHeight;
 
 	itemRendererDom = ir;
 	dataProvider = data;
-	beforeTweenHandler = bth;
-	afterTweenHandler = ath;
 	setDataHandler = sdh;
 	
 	var sizer = window.document.createElement("li");
@@ -259,8 +239,5 @@ function setup(data, ir, bth, ath, sdh, container)
 	};
 
 	window.setInterval(callback, 1000/60);
-}
-
-
-
+}  
 	

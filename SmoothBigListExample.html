@@ -2,17 +2,6 @@
 	<head>
 		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 		<link type='text/css' href='SmoothBigList.css' rel='stylesheet'/>
-		<style>
-		.itemRendererTemplate
-		{
-			display: none
-		}
-		body
-		{
-			margin: 0px;
-			padding: 0px
-		}
-		</style>
 		<script src="SmoothBigListEmbedScript.js"></script>
 		
 		<script>
@@ -47,10 +36,15 @@
 			var itemRenderer = document.getElementById("imageItemRenderer");	
 			var listHolder = document.getElementById('testList');
 
-			setup(dataProvider, itemRenderer, setData, listHolder);
+			setup({
+				dataProvider: dataProvider
+				,itemRenderer: itemRenderer
+				,setDataCallback: setData 
+				,container: listHolder
+			});
 		}
 		
-		function loadJson( url )  {
+		function loadJson(url)  {
 			var script = document.createElement( "script" );
 			script.type = "text/javascript";
 			script.src = url;
@@ -59,7 +53,6 @@
 		
 		
 		function setData(dataItem, itemRenderer) {
-
 			itemRenderer.imageHolder.style.backgroundImage = "url('"+ dataItem.url +"')";
 			itemRenderer.imageHolder1.style.backgroundImage  = "url('"+ dataItem.url +"1')";
 			itemRenderer.imageHolder2.style.backgroundImage  = "url('"+ dataItem.url +"2')";

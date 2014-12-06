@@ -1,4 +1,4 @@
-li{
+li {
 	height: 248px;
 	font: 12px;
 	padding: 4px;
@@ -8,19 +8,22 @@ li{
 	margin: 0 auto;
 }
 
-ul{
+ul {
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
 }
 
-body
-{
+body {
 	margin: 0;
 	padding: 0;
 }
 
-.imageHolder{
+.itemRendererTemplate {
+	display: none
+}
+
+.imageHolder {
 	background-size: cover; 
 	width: 240px; 
 	height: 220px; 
@@ -29,7 +32,7 @@ body
 	background-repeat: no-repeat;
 }
 
-label.image{
+label.image {
 	height: 18px;
 	padding: 1px;
 	margin: 0;

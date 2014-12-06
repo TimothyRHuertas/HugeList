@@ -184,32 +184,30 @@ function initItemRenderers() {
 	}
 }
 
-function setup(data, ir, sdh, container) {
+function setup(options) {
 	availHeight = screen.availHeight;
 
-	itemRendererDom = ir;
-	dataProvider = data;
-	setDataHandler = sdh;
+	itemRendererDom = options.itemRenderer;
+	dataProvider = options.dataProvider;
+	setDataHandler = options.setDataCallback;
+	var container = options.container;
 	
 	var sizer = window.document.createElement("li");
 	window.document.body.appendChild(sizer);
 	var sizerHeight = sizer.offsetHeight;
 
-	var number = Math.round(availHeight/sizer.offsetHeight) * 2;//43 is the height
+	var number = Math.round(availHeight/sizer.offsetHeight) * 2;
 	var scrollHeight = ((dataProvider.length) * sizer.offsetHeight);
 	var listHTML = '<div style="position: absolute; height: 100%; width: 100%; margin: 0; padding: 0"></div>';
 	var scrollHTML = '<div style="max-height: ' + scrollHeight +'px; height: ' + scrollHeight + 'px; width: 1px; position: absolute; margin: 0; padding: 0"></div>';
 
 	container.innerHTML = listHTML + scrollHTML;
-
 	theWindow = container.firstChild;
-
 	window.document.body.removeChild(sizer);
 
 	var theHTML = "<ul style=\"position: relative\">";
 	
-	for(var i=0; i<=number; i++)
-	{
+	for(var i=0; i<=number; i++) {
 		theHTML += "<li></li>";
 	}
 	
@@ -223,7 +221,7 @@ function setup(data, ir, sdh, container) {
 	recordCords(0,0);
 
 	if(scrollHeight > 33554428){
-		alert("no");
+		throw "The list is too big";
 	}
 
 	var callback = function(){
